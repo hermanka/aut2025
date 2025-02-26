@@ -14,7 +14,7 @@ class GoogleTestCase(unittest.TestCase):
 
     def testPageTitle(self):
         self.browser.get('http://www.google.com')
-        element = self.browser.find_element(By.NAME, 'p')
+        element = self.browser.find_element(By.TAG_NAME, 'p')
         print(element.text) 
 
 if __name__ == '__main__':
