@@ -13,7 +13,7 @@ class GoogleTestCase(unittest.TestCase):
         self.addCleanup(self.browser.quit)
 
     def testPageTitle(self):
-        self.browser.get('http://www.google.com')
+        self.browser.get('https://www.example.com')
         element = self.browser.find_element(By.TAG_NAME, 'p')
         print(element.text) 
 
