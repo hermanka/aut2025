@@ -6,11 +6,11 @@ on:
 jobs:
   test:
     name: Functional Test
-      permissions: write-all
-      runs-on: ubuntu-latest
-      steps:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
         - name : Checkout the Repo
-          users: actions/checkout@v4
+          uses: actions/checkout@v4
 
         - name: Create isolated network
           run: docker network create --driver bridge isolated
