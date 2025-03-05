@@ -40,7 +40,7 @@ jobs:
               run: docker stop docker-apache
 
     sast:
-        name: Psalm
+        name: Static Analysis
         permissions: write-all
         runs-on: ubuntu-latest
         steps:
@@ -50,7 +50,24 @@ jobs:
             - name: Psalm Sec Scan
               uses: docker://ghcr.io/psalm/psalm-security-scan
             
-            - name: import sec analysis result to github security code scanning
+            - name: Import Psalm sec analysis result to GitHub Security Code Scanning
               uses: github/codeql-action/upload-sarif@v1
               with:
                 sarif_file: results.sarif
+
+            - name: SonarCloud Scan
+              uses: SonarSource/sonarcloud-github-action@master
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              with:
+                projectBaseDir: .
+                args: >
+                  -Dsonar.organization=my-org
+                  -Dsonar.projectKey=my-project
+                  -Dsonar.sources=.
+                  -Dsonar.exclusions=**/vendor/**,**/tests/**
+
+            - name: Import SonarCloud analysis result to GitHub Security Code Scanning
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                sarif_file: .scannerwork/report-task.txt
