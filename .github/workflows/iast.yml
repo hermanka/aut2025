@@ -35,6 +35,22 @@ jobs:
               with:
                 target: ${{ env.URL }}
                 network_name: isolated
-                
+
             - name: stop docker
               run: docker stop docker-apache
+
+    sast:
+        name: Psalm
+        permissions: write-all
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout the Repo
+              uses: actions/checkout@v4
+
+            - name: Psalm Sec Scan
+              uses: docker://ghcr.io/psalm/psalm-security-scan
+            
+            - name: import sec analysis result to github security code scanning
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                sarif_file: results.sarif
