@@ -62,7 +62,7 @@ jobs:
               with:
                 projectBaseDir: .
                 args: >
-                  -Dsonar.organization=k.eii
+                  -Dsonar.organization=jonscafe
                   -Dsonar.projectKey=jonscafe_aut2025
                   -Dsonar.sources=.
                   -Dsonar.exclusions=**/vendor/**,**/tests/**
