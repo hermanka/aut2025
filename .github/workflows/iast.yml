@@ -56,7 +56,7 @@ jobs:
                 sarif_file: results.sarif
 
             - name: sonarqube-scan
-              uses: SonarSource/sonarqube-scan-action @master
+              uses: SonarSource/sonarqube-scan-action@master
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
