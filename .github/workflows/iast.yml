@@ -51,7 +51,7 @@ jobs:
               uses: docker://ghcr.io/psalm/psalm-security-scan
             
             - name: Import Psalm sec analysis result to GitHub Security Code Scanning
-              uses: github/codeql-action/upload-sarif@v1
+              uses: github/codeql-action/upload-sarif@v2
               with:
                 sarif_file: results.sarif
 
@@ -60,6 +60,7 @@ jobs:
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
+                sarif_file: sonar-report.sarif
                 projectBaseDir: .
                 args: >
                   -Dsonar.organization=jonscafe
@@ -67,8 +68,9 @@ jobs:
                   -Dsonar.sources=.
                   -Dsonar.exclusions=**/vendor/**,**/tests/**
                   -Dsonar.branch.name=${{ github.ref_name }}
+                  -Dsonar.report.export.path=sonar-report.sarif
 
             - name: Import SonarCloud analysis result to GitHub Security Code Scanning
-              uses: github/codeql-action/upload-sarif@v1
+              uses: github/codeql-action/upload-sarif@v2
               with:
                 sarif_file: .scannerwork/report-task.txt
