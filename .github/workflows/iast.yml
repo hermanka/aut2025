@@ -69,6 +69,9 @@ jobs:
                   -Dsonar.branch.name=${{ github.ref_name }}
                   -Dsonar.report.export.path=sonar-report.sarif
 
+            - name: List files after SonarCloud scan
+              run: ls -al .
+                
             - name: Import SonarCloud analysis result to GitHub Security Code Scanning
               uses: github/codeql-action/upload-sarif@v2
               with:
