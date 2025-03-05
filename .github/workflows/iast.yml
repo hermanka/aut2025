@@ -56,14 +56,14 @@ jobs:
                 sarif_file: results.sarif
 
             - name: SonarCloud Scan
-              uses: SonarSource/sonarcloud-github-action@master
+              uses: SonarSource/sonarcloud-scan-action@master
               env:
                 SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
               with:
                 projectBaseDir: .
                 args: >
-                  -Dsonar.organization=my-org
-                  -Dsonar.projectKey=my-project
+                  -Dsonar.organization=k.eii
+                  -Dsonar.projectKey=jonscafe
                   -Dsonar.sources=.
                   -Dsonar.exclusions=**/vendor/**,**/tests/**
 
